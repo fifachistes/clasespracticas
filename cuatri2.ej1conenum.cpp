@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>// KEI U ARE THE GOAT U HEAR ME?? UR THE FUCKING GOATTTTTTTTTTTTT
 #include <fstream>
 #include <iomanip>
 #include <string>
@@ -25,14 +25,34 @@ typedef struct {
 //prototipos
 void cargar(tPlantilla& plantilla);
 void mostrar(tPlantilla plantilla);
-int menu(tPlantilla& plantilla);
+int menu();
 void insertar(tPlantilla& plantilla);
 void eliminar(tPlantilla& plantilla);
 
 int main() {
-
     tPlantilla plantilla;
+    int aux;
+    do {
+        aux = menu();
+        switch (aux) {
+        case 1:cargar(plantilla);
+            break;
+        case 2:insertar(plantilla);
+            break;
+        case 3:eliminar(plantilla);
+            break;
+        case 4:mostrar(plantilla);
+            break;
+        default:
+            cout << " mal hecho" << endl;
+            break;
+        }
 
+    } while (aux != 5);
+
+    return 0;
+}
+   /* 
     int eleccion = 1;
     while (eleccion != 5) {
         eleccion = menu(plantilla);
@@ -44,10 +64,9 @@ int main() {
     else {
         cout << endl << "<<<<< " << plantilla.numEmpleados << " EMPLEADO RESTANTE >>>>>" << endl;
     }
-    mostrar(plantilla);
-    return 0;
-}
-int menu(tPlantilla& plantilla) {
+    mostrar(plantilla);  */
+   
+int menu() {
     int op;
     cout << "OPCION 1: Cargar lista de empleados" << endl
         << "OPCION 2: Insertar un empleado en una posicion deseada" << endl
@@ -56,16 +75,6 @@ int menu(tPlantilla& plantilla) {
         << "OPCION 5: SALIR" << endl
         << ">>>> ";
     cin >> op;
-    cout << endl;
-    switch (op) {
-    case 1:cargar(plantilla);
-        break;
-    case 2:insertar(plantilla);
-        break;
-    case 3:eliminar(plantilla);
-        break;
-    case 4:mostrar(plantilla);
-    }
     return op;
 }
 void eliminar(tPlantilla& plantilla) {
@@ -76,7 +85,7 @@ void eliminar(tPlantilla& plantilla) {
     }
     cout << endl << "En que posicion desea eliminar el empleado?(Hay " << plantilla.numEmpleados << " empleados atualmente): ";
     cin >> posEli;
-    for (int i = posEli;i < plantilla.numEmpleados;i++) {
+    for (int i = posEli;i < plantilla.numEmpleados-1;i++) {
         plantilla.empleados[i].nombre = plantilla.empleados[i + 1].nombre;
         plantilla.empleados[i].edad = plantilla.empleados[i + 1].edad;
         plantilla.empleados[i].contrato = plantilla.empleados[i + 1].contrato;
@@ -94,7 +103,7 @@ void insertar(tPlantilla& plantilla) {
             }
             cout << endl << "En que posicion desea introducir el nuevo empleado?(Hay " << plantilla.numEmpleados << " empleados atualmente): ";
             cin >> posIn;
-            for (int i = plantilla.numEmpleados;i >= posIn;i--) {
+            for (int i = plantilla.numEmpleados;i > posIn;i--) {
                 plantilla.empleados[i].nombre = plantilla.empleados[i - 1].nombre;
                 plantilla.empleados[i].edad = plantilla.empleados[i - 1].edad;
                 plantilla.empleados[i].contrato = plantilla.empleados[i - 1].contrato;
